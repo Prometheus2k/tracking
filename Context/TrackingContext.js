@@ -58,7 +58,7 @@ export const TrackingProvider = ({ children }) => {
           deliveryTime: shipment.deliveryTime.toNumber(),
           distance: shipment.distance.toNumber(),
           isPaid: shipment.isPaid,
-          status: shipment.status.toNumber(),
+          status: shipment.status,
         };
       });
 
@@ -134,7 +134,7 @@ export const TrackingProvider = ({ children }) => {
         deliveryTime: shipmentsCount.deliveryTime.toNumber(),
         distance: shipmentsCount.distance.toNumber(),
         price: ethers.utils.formatEther(shipmentsCount.price.toString()),
-        status: shipmentsCount.status.toNumber(),
+        status: shipmentsCount.status,
         isPaid: shipmentsCount.isPaid,
       };
       return singleShipment;
