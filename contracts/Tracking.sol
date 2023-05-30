@@ -144,9 +144,12 @@ contract Tracking {
         shipment.deliveryTime = block.timestamp;
         typeShipment.deliveryTime = block.timestamp;
 
+
         uint256 amount = shipment.price;
         payable(shipment.sender).transfer(amount);
         shipment.isPaid = true;
+        typeShipment.isPaid = true;
+        
         emit ShipmentDelivered(_sender, _receiver, shipment.deliveryTime);
         emit ShipmentPaid(_sender, _receiver, amount);
     }

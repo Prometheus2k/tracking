@@ -36,6 +36,7 @@ const index = () => {
 
     return async () => {
       const allData = await getCampaignData;
+      console.log(allData);
 
       setAllShipmentsdata(allData);
     };
