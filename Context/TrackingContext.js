@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 
+//INTERNAL IMPORT
 import tracking from "./Tracking.json";
-const ContractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+const ContractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 const ContractABI = tracking.abi;
 
+//FETCHING SMART CONTRACT
 const fetchContract = (signerOrProvider) => {
   return new ethers.Contract(ContractAddress, ContractABI, signerOrProvider);
 };
@@ -13,6 +15,7 @@ const fetchContract = (signerOrProvider) => {
 export const TrackingContext = React.createContext();
 
 export const TrackingProvider = ({ children }) => {
+  //STATE VARIABLE
   const DappName = "Product Tracking App";
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -73,7 +76,7 @@ export const TrackingProvider = ({ children }) => {
       if (!window.ethereum) return "Install Metamask";
 
       const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
+        method: "eth_accounts",
       });
       const provider = new ethers.providers.JsonRpcProvider();
       const contract = fetchContract(provider);
@@ -91,7 +94,7 @@ export const TrackingProvider = ({ children }) => {
       if (!window.ethereum) return "Install Metamask";
 
       const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
+        method: "eth_accounts",
       });
 
       const web3modal = new Web3Modal();
@@ -121,21 +124,21 @@ export const TrackingProvider = ({ children }) => {
       if (!window.ethereum) return "Install Metamask";
 
       const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
+        method: "eth_accounts",
       });
       const provider = new ethers.providers.JsonRpcProvider();
       const contract = fetchContract(provider);
-      const shipmentsCount = await contract.getShipment(accounts[0], index * 1);
+      const shipments = await contract.getShipment(accounts[0], index * 1);
 
       const singleShipment = {
-        sender: shipmentsCount.sender,
-        receiver: shipmentsCount.receiver,
-        pickupTime: shipmentsCount.pickupTime.toNumber(),
-        deliveryTime: shipmentsCount.deliveryTime.toNumber(),
-        distance: shipmentsCount.distance.toNumber(),
-        price: ethers.utils.formatEther(shipmentsCount.price.toString()),
-        status: shipmentsCount.status,
-        isPaid: shipmentsCount.isPaid,
+        sender: shipments.sender,
+        receiver: shipments.receiver,
+        pickupTime: shipments.pickupTime.toNumber(),
+        deliveryTime: shipments.deliveryTime.toNumber(),
+        distance: shipments.distance.toNumber(),
+        price: ethers.utils.formatEther(shipments.price.toString()),
+        status: shipments.status,
+        isPaid: shipments.isPaid,
       };
       return singleShipment;
     } catch (error) {
@@ -149,7 +152,7 @@ export const TrackingProvider = ({ children }) => {
       if (!window.ethereum) return "Install Metamask";
 
       const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
+        method: "eth_accounts",
       });
 
       const web3modal = new Web3Modal();
@@ -174,6 +177,7 @@ export const TrackingProvider = ({ children }) => {
     }
   };
 
+  // CHECK WALLET CONNECTED
   const checkIfWalletConnected = async () => {
     try {
       if (!window.ethereum) return "Install Metamask";
@@ -182,7 +186,7 @@ export const TrackingProvider = ({ children }) => {
         method: "eth_accounts",
       });
 
-      if (accounts.length > 0) return setCurrentUser(accounts[0]);
+      if (accounts.length) return setCurrentUser(accounts[0]);
       else return "No account found";
     } catch (error) {
       console.log(
@@ -192,6 +196,7 @@ export const TrackingProvider = ({ children }) => {
     }
   };
 
+  // CONNECT WALLET FUNCTION
   const connectWallet = async () => {
     try {
       if (!window.ethereum) return "Install Metamask";
@@ -201,7 +206,7 @@ export const TrackingProvider = ({ children }) => {
       });
       setCurrentUser(accounts[0]);
     } catch (error) {
-      console.log("Something went wrong while connecting wallet", error);
+      return "Something went wrong while connecting wallet";
     }
   };
 

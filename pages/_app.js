@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 
+//INTERNAL IMPORT
 import { TrackingProvider } from "@/Context/TrackingContext";
 import { Navbar, Footer } from "@/Components";
 

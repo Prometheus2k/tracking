@@ -64,9 +64,9 @@ export default ({ completeModal, setCompleteModal, completeShipment }) => {
 
               <button
                 onClick={() => changeStatus()}
-                className="block w-full px-4 py-2 mt-3 text-base font-medium text-white bg-indigo-600 rounded-lg shadow-lg hover:bg-indigo-700"
+                className="block w-full px-4 py-3 mt-3 text-sm font-medium text-white text-center bg-indigo-600 rounded-lg hover:bg-indigo-500 active:bg-indigo-700 ring-offset-2 ring-indigo-600 focus:ring-2"
               >
-                Complete Shipment
+                Change Status
               </button>
             </form>
           </div>

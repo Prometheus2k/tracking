@@ -41,7 +41,7 @@ export default ({ getModal, setGetModal, getShipment }) => {
           </div>
           <div className="max-w-sm mx-auto py-3 space-y-3 text-center">
             <h4 className="text-lg font-medium text-gray-800">
-              Product tracking Details
+              Product Tracking Details
             </h4>
 
             <form onSubmit={(e) => e.preventDefault()}>

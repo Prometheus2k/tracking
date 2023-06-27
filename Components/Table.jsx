@@ -35,7 +35,7 @@ export default ({ setCreateShipmentModel, allShipmentsdata }) => {
       </div>
 
       <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
-        <table className="w-full table-auto text-sm tedxt-left">
+        <table className="w-full table-auto text-sm text-left">
           <thead className="bg-gray-50 text-gray-600 font-medium border-b">
             <tr>
               <th className="py-3 px-6">Sender</th>

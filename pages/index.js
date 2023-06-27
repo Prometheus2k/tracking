@@ -23,6 +23,7 @@ const index = () => {
     getShipmentCount,
   } = useContext(TrackingContext);
 
+  // STATE VARIABLES
   const [createShipmentModel, setCreateShipmentModel] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
   const [startModal, setStartModal] = useState(false);
